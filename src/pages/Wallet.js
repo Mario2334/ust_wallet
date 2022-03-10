@@ -79,13 +79,13 @@ function Wallet() {
         let wallet_address = address_ele.value;
         let amount_ele = document.getElementById("set_amount");
         let set_amount = amount_ele.value;
-        return {wallet_address,set_amount };
+        return [wallet_address,set_amount ];
     }
 
     let depositExecution = async () => {
-        let {wallet_address,set_amount} = getInput();
+        let [contract_address,set_amount] = getInput();
         const MILLION=1000000;
-        const contract_address='terra1xvda8nmcqym3q7hdrmeuqsgneeddkv3gvhntlx';
+        // const contract_address='terra1xvda8nmcqym3q7hdrmeuqsgneeddkv3gvhntlx';
         const calculated_dep = set_amount*MILLION;
         const msg = new window.Terra.MsgExecuteContract(
             state.wallet.key.accAddress,
@@ -105,8 +105,9 @@ function Wallet() {
     }
 
     let claimExecution = async () => {
+        let [contract_address,set_amount] = getInput();
         let localState = state;
-        const contract_address='terra1xvda8nmcqym3q7hdrmeuqsgneeddkv3gvhntlx'
+        // const contract_address='terra1xvda8nmcqym3q7hdrmeuqsgneeddkv3gvhntlx'
         const msg = new window.Terra.MsgExecuteContract(
             state.wallet.key.accAddress,
             contract_address,
@@ -189,7 +190,7 @@ function Wallet() {
                             <FormControl >
                                 <InputGroup>
 
-                                    <Textarea id="wallet_addr" type="text" placeholder="Nemonics" />
+                                    <Input id="wallet_addr" type="text" placeholder="Contract Address" />
                                 </InputGroup>
 
                             </FormControl>
